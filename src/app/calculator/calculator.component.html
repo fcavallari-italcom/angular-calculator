@@ -1,41 +1,41 @@
 <div class="calculator">
 
     <display [text]="textToShow"></display>
-</div>
-<br>
-<div>
-    <div class="d-grid gap-2 d-md-block">
-        <button class="btn btn-primary" type="button">C</button>
-        <button class="btn btn-primary" type="button">%</button>
-        <button class="btn btn-primary" type="button">-x</button>
-        <button class="btn btn-primary" type="button">/</button>
-    </div>
     <br>
-    <div class="d-grid gap-2 d-md-block">
-        <button class="btn btn-primary" type="button">7</button>
-        <button class="btn btn-primary" type="button">8</button>
-        <button class="btn btn-primary" type="button">9</button>
-        <button class="btn btn-primary" type="button">X</button>
-    </div>
-    <br>
-    <div class="d-grid gap-2 d-md-block">
-        <button class="btn btn-primary" type="button">4</button>
-        <button class="btn btn-primary" type="button">5</button>
-        <button class="btn btn-primary" type="button">6</button>
-        <button class="btn btn-primary" type="button">-</button>
-    </div>
-    <br>
-    <div class="d-grid gap-2 d-md-block">
-        <button class="btn btn-primary" type="button">1</button>
-        <button class="btn btn-primary" type="button">2</button>
-        <button class="btn btn-primary" type="button">3</button>
-        <button class="btn btn-primary" type="button">+</button>
-    </div>
-    <br>
-    <div class="d-grid gap-2 d-md-block">
-        <button class="btn btn-primary" type="button">0</button>
-        <button class="btn btn-primary" type="button">00</button>
-        <button class="btn btn-primary" type="button">,</button>
-        <button class="btn btn-primary" type="button">=</button>
+    <div>
+        <div class="d-grid gap-2 d-md-block">
+            <button class="btn btn-primary" type="button" (click)="clear()">C</button>
+            <button class="btn btn-primary" type="button" (click)="operation('%')">%</button>
+            <button class="btn btn-primary" type="button">-x</button>
+            <button class="btn btn-primary" type="button" (click)="operation('/')">/</button>
+        </div>
+        <br>
+        <div class="d-grid gap-2 d-md-block">
+            <button class="btn btn-primary" type="button" (click)="getNum(7)">7</button>
+            <button class="btn btn-primary" type="button" (click)="getNum(8)">8</button>
+            <button class="btn btn-primary" type="button" (click)="getNum(9)">9</button>
+            <button class="btn btn-primary" type="button" (click)="operation('*')">X</button>
+        </div>
+        <br>
+        <div class="d-grid gap-2 d-md-block">
+            <button class="btn btn-primary" type="button" (click)="getNum(4)">4</button>
+            <button class="btn btn-primary" type="button" (click)="getNum(5)">5</button>
+            <button class="btn btn-primary" type="button" (click)="getNum(6)">6</button>
+            <button class="btn btn-primary" type="button" (click)="operation('-')">-</button>
+        </div>
+        <br>
+        <div class="d-grid gap-2 d-md-block">
+            <button class="btn btn-primary" type="button" (click)="getNum(1)">1</button>
+            <button class="btn btn-primary" type="button" (click)="getNum(2)">2</button>
+            <button class="btn btn-primary" type="button" (click)="getNum(3)">3</button>
+            <button class="btn btn-primary" type="button" (click)="operation('+')">+</button>
+        </div>
+        <br>
+        <div class="d-grid gap-2 d-md-block">
+            <button class="btn btn-primary" type="button" (click)="getNum(0)">0</button>
+            <button class="btn btn-primary" type="button" (click)="getNum(00)">00</button>
+            <button class="btn btn-primary" type="button">,</button>
+            <button class="btn btn-primary" type="button" (click)="calculate()">=</button>
+        </div>
     </div>
 </div>
