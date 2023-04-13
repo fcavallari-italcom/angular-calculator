@@ -2,11 +2,11 @@
 
     <display [text]="textToShow"></display>
     <br>
-    <div>
+    <div class="buttons">
         <div class="d-grid gap-2 d-md-block">
             <button class="btn btn-primary" type="button" (click)="clear()">C</button>
             <button class="btn btn-primary" type="button" (click)="operation('%')">%</button>
-            <button class="btn btn-primary" type="button">-x</button>
+            <button class="btn btn-primary" type="button" (click)="delete()">-x</button>
             <button class="btn btn-primary" type="button" (click)="operation('/')">/</button>
         </div>
         <br>
@@ -33,8 +33,8 @@
         <br>
         <div class="d-grid gap-2 d-md-block">
             <button class="btn btn-primary" type="button" (click)="getNum(0)">0</button>
-            <button class="btn btn-primary" type="button" (click)="getNum(00)">00</button>
-            <button class="btn btn-primary" type="button">,</button>
+            <button class="btn btn-primary" type="button" (click)="getNum('00')">00</button>
+            <button class="btn btn-primary" type="button" (click)="getNum('.')">.</button>
             <button class="btn btn-primary" type="button" (click)="calculate()">=</button>
         </div>
     </div>

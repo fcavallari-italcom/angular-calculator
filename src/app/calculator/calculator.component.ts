@@ -15,15 +15,7 @@ export class CalculatorComponent implements OnInit {
   operator=null;
   waitSecondNumber=false; */
 
-  sum:number;
-  sos:number;
-  mol:number;
-  div:number;
   constructor() {
-    this.sum=0;
-    this.sos=0;
-    this.mol=0;
-    this.div=0;
    }
 
   ngOnInit(): void {
@@ -38,6 +30,12 @@ export class CalculatorComponent implements OnInit {
     }
   }
 
+  /* getDecimal(){
+    if(!this.textToShow.includes('.')){
+        this.textToShow += '.'; 
+    }
+  } */
+
   operation(op:any){
     this.firstValue=parseFloat(this.textToShow);
     this.op=op;
@@ -49,8 +47,11 @@ export class CalculatorComponent implements OnInit {
     const first=this.firstValue!;
     const second=parseFloat(this.textToShow);
 
+    // quando possibile evita di usare il tipo 'any' qui credo sarebbe andato bene un 'number'
     let result:any;
-    if(this.op=='+'){
+
+    // Qui dovresti usare uno switch (https://www.tutorialsteacher.com/typescript/typescript-switch)
+    /* if(this.op=='+'){
       result=first+second;
     }
     else if(this.op=='-'){
@@ -63,15 +64,42 @@ export class CalculatorComponent implements OnInit {
       result=first/second;
     }
     else if(this.op=='%'){
-      result=first%second;
+      // la percentuale non si calcola cosi :-)
+      result=(first/100)*second;
+    } */
+
+    switch(this.op){
+      case '+':
+        result=first+second;
+        break;
+      case '-':
+        result=first-second;
+        break;
+      case '*':
+        result=first*second;
+        break;
+      case '/':
+        result=first+second;
+        break;
+      case '%':
+        result=(first/100)*second;
+        break;
     }
 
     this.firstValue!=result;
     this.textToShow=result.toString();
   }
 
+  delete() {
+    if (this.textToShow != "") {
+      this.textToShow = this.textToShow.substr(0, this.textToShow.length - 1)
+    }
+  }
+
   clear(){
     this.textToShow='';
+    this.firstValue=null;
+    this.op=null;
   }
 
   /* getNum(n:string){
