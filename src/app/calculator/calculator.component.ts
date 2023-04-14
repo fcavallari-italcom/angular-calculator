@@ -8,12 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class CalculatorComponent implements OnInit {
 
   textToShow:string='';
-  firstValue:number|null=null;
+  result?:number;
+  firstValue?:number;
+  secondValue?:number;
   op:string|null=null;
-
-  /* firstValue=null;
-  operator=null;
-  waitSecondNumber=false; */
 
   constructor() {
    }
@@ -21,8 +19,8 @@ export class CalculatorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getNum(num:any){
-    if(this.textToShow=='0'){
+  setNum(num:any){
+    if(this.textToShow=='0' || this.result){
       this.textToShow=num.toString();
     }
     else{
@@ -30,124 +28,60 @@ export class CalculatorComponent implements OnInit {
     }
   }
 
-  /* getDecimal(){
-    if(!this.textToShow.includes('.')){
-        this.textToShow += '.'; 
-    }
-  } */
-
-  operation(op:any){
+  operation(op:string){
     this.firstValue=parseFloat(this.textToShow);
     this.op=op;
     this.textToShow=' ';
-    
   }
 
   calculate(){
-    const first=this.firstValue!;
-    const second=parseFloat(this.textToShow);
-
-    // quando possibile evita di usare il tipo 'any' qui credo sarebbe andato bene un 'number'
-    let result:any;
-
-    // Qui dovresti usare uno switch (https://www.tutorialsteacher.com/typescript/typescript-switch)
-    /* if(this.op=='+'){
-      result=first+second;
+    if(this.result && !this.firstValue) {
+      this.firstValue = this.result;
     }
-    else if(this.op=='-'){
-      result=first-second;
+    else if(this.firstValue) {
+      this.result=0;
+      this.secondValue=parseFloat(this.textToShow);
     }
-    else if(this.op=='*'){
-      result=first*second;
-    }
-    else if(this.op=='/'){
-      result=first/second;
-    }
-    else if(this.op=='%'){
-      // la percentuale non si calcola cosi :-)
-      result=(first/100)*second;
-    } */
-
-    switch(this.op){
-      case '+':
-        result=first+second;
-        break;
-      case '-':
-        result=first-second;
-        break;
-      case '*':
-        result=first*second;
-        break;
-      case '/':
-        result=first+second;
-        break;
-      case '%':
-        result=(first/100)*second;
-        break;
+    else {
+      return;
     }
 
-    this.firstValue!=result;
-    this.textToShow=result.toString();
+    if(this.firstValue && this.secondValue) {
+      switch(this.op){
+        case '+':
+          this.result= this.firstValue + this.secondValue;
+          break;
+        case '-':
+          this.result=this.firstValue -this.secondValue;
+          break;
+        case '*':
+          this.result=this.firstValue *this.secondValue;
+          break;
+        case '/':
+          this.result=this.firstValue /this.secondValue;
+          break;
+        case '%':
+          this.result=(this.firstValue /100)*this.secondValue;
+          break;
+      }
+    } 
+
+    this.firstValue = undefined;
+    this.textToShow=this.result?.toString() || '';
   }
 
   delete() {
     if (this.textToShow != "") {
-      this.textToShow = this.textToShow.substr(0, this.textToShow.length - 1)
+      this.textToShow = this.textToShow.substring(0, this.textToShow.length - 1)
     }
   }
 
   clear(){
+    this.result = undefined;
     this.textToShow='';
-    this.firstValue=null;
+    this.firstValue = undefined;
+    this.secondValue = undefined;
     this.op=null;
   }
-
-  /* getNum(n:string){
-    this.textToShow=n;
-  }
-
-  clear(){
-    this.textToShow='';
-  } */
-
-  /* getNum(n:string){
-    if(this.waitSecondNumber){
-      this.textToShow=n;
-      this.waitSecondNumber=false;
-    }
-    else{
-      this.textToShow=='0'? this.textToShow=n: this.textToShow+=n;
-    }
-  }
-  
-  private calculation(op,op2){
-    switch(op){
-      case '+': return this.firstValue +=op2;
-      case '-': return this.firstValue -=op2;
-      case '*': return this.firstValue *=op2;
-      case '/': return this.firstValue /=op2;
-      case '=': return op2;
-    }
-  }
-
-  operation(op:string){
-    if(this.firstValue==null){
-      this.firstValue=Number(this.textToShow);
-    }
-    else if(this.operator){
-      const result=this.calculation(this.operator,Number(this.textToShow));
-      this.textToShow=String(result);
-      this.firstValue=result;
-    }
-    this.operator=op;
-    this.waitSecondNumber=true;
-  }
-
-  clear(){
-    this.textToShow='';
-    this.firstValue = null;
-    this.operator = null;
-    this.waitSecondNumber = false;
-  } */
 
 }
