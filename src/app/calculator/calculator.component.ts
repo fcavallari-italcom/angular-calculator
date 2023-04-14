@@ -21,6 +21,7 @@ export class CalculatorComponent implements OnInit {
 
   setNum(num:any){
     if(this.textToShow=='0' || this.result){
+      this.result=undefined;
       this.textToShow=num.toString();
     }
     else{
@@ -83,5 +84,5 @@ export class CalculatorComponent implements OnInit {
     this.secondValue = undefined;
     this.op=null;
   }
-
+  
 }
